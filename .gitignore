@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+stock_data.db
+prediction_plot.png
+weekly_predictions.log
+.DS_Store
