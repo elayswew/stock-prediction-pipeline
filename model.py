@@ -30,9 +30,9 @@ def select_best_model(X, y):
             X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
             y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-        model.fit(X_train, y_train)
-        preds = model.predict(X_test)
-        mae_list.append(mean_absolute_error(y_test, preds))
+            model.fit(X_train, y_train)
+            preds = model.predict(X_test)
+            mae_list.append(mean_absolute_error(y_test, preds))
 
         scores[name] = sum(mae_list) / len(mae_list)
 
