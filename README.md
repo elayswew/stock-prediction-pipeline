@@ -71,9 +71,16 @@ next-week high/low, and a chart saved to `prediction_plot.png`.
 ## Results & Findings
 
 A notable finding: **simple linear models (Linear Regression, Ridge) clearly outperformed
-the tree-based ensembles (Random Forest, Gradient Boosting)** — roughly 4x lower error.
-On noisy financial data, the more flexible models overfit the noise, while the simpler
-models generalized better. A concrete reminder that more complex isn't always better.
+the tree-based ensembles (Random Forest, Gradient Boosting)** — several times lower error
+(roughly 3x–7x depending on the stock). On noisy financial data, the more flexible models
+overfit the noise, while the simpler models generalized better.
+
+Tree-based models also **cannot extrapolate beyond the value range seen in training**: a
+stock making new highs pushes test-period prices above anything in the training window, so
+the trees systematically underestimate. This effect is larger for high-priced, trending
+stocks (e.g. MU) than for more moderate ones (e.g. AAPL), which is why the gap between
+linear and tree models varies by stock. A concrete reminder that more complex isn't always
+better.
 
 ## Limitations
 
@@ -82,8 +89,8 @@ models generalized better. A concrete reminder that more complex isn't always be
   day-to-day. This pipeline is a methodology demonstration, not a trading signal.
 - **Price-only features.** The model uses only historical prices, ignoring fundamentals,
   news, and macro factors that drive real markets.
-- **Linear models extrapolate poorly.** For a stock at all-time highs, the model tends to
-  overshoot, since it's predicting beyond its observed range.
+- **Tree models extrapolate poorly (in fact, not at all).** For a stock at all-time highs,
+  they cannot predict beyond the highest value seen in training, leading to large errors.
 
 ## Future Work
 
